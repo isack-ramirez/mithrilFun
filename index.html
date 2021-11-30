@@ -1,61 +1,72 @@
 <head>
   <link rel="stylesheet" href="./css/index.css" />
-  
 </head>
 
 <body>
   <script src="https://unpkg.com/mithril/mithril.js"></script>
-  <script src='./js/getNotes.js'></script>
-  <script>
 
-      
+  <script>
+    const doneNotes = init();
+    console.log(doneNotes);
+
+    function init() {
+      var values = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
+
+      while (i--) {
+        values.push(localStorage.getItem(keys[i]));
+      }
+
+      return values;
+    }
+
+  
+
     var root = document.body;
 
     var state = {
-        text : "note here",
-        update: function(value){
-            state.text=value;
-        }
-    }
+      count: doneNotes.length,
+      text: "note here",
+      update: function (value) {
+        state.text = value;
+      },
+    };
 
     m.render(
       root,
-     m('div.appWrapper',
+      m(
+        "div.appWrapper",
 
-    m("div.titleWrapper",
-     m("h1", { class: "title" }, "Note Taker:")),
+        m("div.titleWrapper", m("h1", { class: "title" }, "Note Taker:")),
 
+        m(
+          "div.noteFormWrapper",
+          m("h1", { class: "test" }, "Enter Note : "),
 
-
-    m('div.noteFormWrapper',
-        m('h1', {class: 'test'}, "Enter Note : "),
-        
-        m('textarea.input', {
-            oninput: function(e){  state.update(e.target.value)   }, //function here
+          m("textarea.input", {
+            oninput: function (e) {
+              state.update(e.target.value);
+            }, //function here
             value: state.text,
             class: "noteText",
-        }),
+          }),
 
-        m('button', {
-            class:'submitButton',
-            onclick : function(e){
-                
-               console.log(state.text);
-               window.localStorage.setItem(state.text, 1)
-             
-
+          m(
+            "button",
+            {
+              class: "submitButton",
+              onclick: function (e) {
+                console.log(state.text);
+                state.count++;
+                window.localStorage.setItem(state.count, state.text);
+              },
             },
-            
-        },
-        "submit"
+            "submit"
+          ),
+        
         )
-
-
-    )
-    
-    
-
-    ));
+      )
+    );
   </script>
-  <script src="https://unpkg.com/mithril/mithril.js"></script>
 </body>
