@@ -3,3 +3,18 @@
   align-items: center;
   justify-content: center;
 }
+
+.noteFormWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+
+.submitButton{
+
+    width: 10%;
+    height: 3.5vh;
+
+}

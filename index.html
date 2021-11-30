@@ -1,20 +1,61 @@
 <head>
-    <link rel="stylesheet" href='./css/index.css'>
+  <link rel="stylesheet" href="./css/index.css" />
+  
 </head>
 
 <body>
   <script src="https://unpkg.com/mithril/mithril.js"></script>
+  <script src='./js/getNotes.js'></script>
   <script>
+
+      
     var root = document.body;
+
+    var state = {
+        text : "note here",
+        update: function(value){
+            state.text=value;
+        }
+    }
 
     m.render(
       root,
+     m('div.appWrapper',
+
+    m("div.titleWrapper",
+     m("h1", { class: "title" }, "Note Taker:")),
 
 
-      m('div.titleWrapper', 
-      m("h1", { class: "title" }, "Note Taker:")
-      )
 
-    );
+    m('div.noteFormWrapper',
+        m('h1', {class: 'test'}, "Enter Note : "),
+        
+        m('textarea.input', {
+            oninput: function(e){  state.update(e.target.value)   }, //function here
+            value: state.text,
+            class: "noteText",
+        }),
+
+        m('button', {
+            class:'submitButton',
+            onclick : function(e){
+                
+               console.log(state.text);
+               window.localStorage.setItem(state.text, 1)
+             
+
+            },
+            
+        },
+        "submit"
+        )
+
+
+    )
+    
+    
+
+    ));
   </script>
+  <script src="https://unpkg.com/mithril/mithril.js"></script>
 </body>
