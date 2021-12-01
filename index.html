@@ -6,6 +6,9 @@
   <script src="https://unpkg.com/mithril/mithril.js"></script>
 
   <script>
+
+    
+
     const doneNotes = init();
     console.log(doneNotes);
 
@@ -60,6 +63,7 @@
                 console.log(state.text);
                 state.count++;
                 window.localStorage.setItem(state.count, state.text);
+                
               },
             },
             "submit"
@@ -68,5 +72,7 @@
         )
       )
     );
+    
   </script>
+ 
 </body>
